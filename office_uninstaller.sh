@@ -207,6 +207,7 @@ deletefiles ~/Library/Preferences/ByHost/com.microsoft
 
 #10 Remove the receipts
 deletefiles /Library/Receipts/Office2011_
+deletefiles /Library/Receipts/Office2016_
 deletefiles /private/var/db/receipts/com.microsoft.office
 
 #11 Remove the Microsoft fonts
