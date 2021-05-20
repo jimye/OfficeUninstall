@@ -1,11 +1,11 @@
 #! /bin/sh
 
 # Author : jim ye
-# This is a shell scirpt to uninstall Microsoft Office for Mac 2011/2016
+# This is a shell scirpt to uninstall Microsoft Office for Mac 2011/2016/2019/365
 
 # Reference:
 # 1.https://support.microsoft.com/en-us/kb/2398768
-# 2.https://support.office.com/en-us/article/Troubleshoot-Office-2016-for-Mac-issues-by-completely-uninstalling-before-you-reinstall-ec3aa66e-6a76-451f-9d35-cba2e14e94c0?omkt=en-US&ui=en-US&rs=en-US&ad=US
+# 2.https://support.microsoft.com/en-us/office/troubleshoot-office-for-mac-issues-by-completely-uninstalling-before-you-reinstall-ec3aa66e-6a76-451f-9d35-cba2e14e94c0?omkt=en-us&ui=en-us&rs=en-us&ad=us
 
 delete()
 {
@@ -26,7 +26,7 @@ deletefiles()
     done
 }
 
-echo 'This will completely uninstall Microsoft Office for Mac 2011/2016 from the computer'
+echo 'This will completely uninstall Microsoft Office for Mac 2011/2016/2019/365 from the computer'
 
 #0 Quit all office app
 
@@ -43,15 +43,21 @@ delete /Applications/Microsoft\ Excel.app
 delete /Applications/Microsoft\ OneNote.app
 delete /Applications/Microsoft\ PowerPoint.app
 delete /Applications/Microsoft\ Word.app
+delete /Applications/OneDrive.app
 
 #2 Remove the Preferences
 deletefiles ~/Library/Preferences/com.microsoft
 delete ~/Library/Preferences/Microsoft/Office\ 2011
 deletefiles /Library/Preferences/com.microsoft
+delete /Library/Preferences/com.microsoft.office.licensingV2.plist
 delete /Library/LaunchDaemons/com.microsoft.office.licensing.helper.plist
 delete /Library/PrivilegedHelperTools/com.microsoft.office.licensing.helper
 delete /Library/LaunchDaemons/com.microsoft.office.licensingV2.helper.plist
+delete /Library/LaunchDaemons/com.microsoft.autoupdate.helper.plist
+delete /Library/LaunchDaemons/com.microsoft.onedriveupdaterdaemon.plist
 delete /Library/PrivilegedHelperTools/com.microsoft.office.licensingV2.helper
+delete /Library/PrivilegedHelperTools/com.microsoft.autoupdate.helper
+delete /Library/LaunchAgents/com.microsoft.update.agent.plist
 
 #3 Remove the Container
 delete ~/Library/Containers/com.microsoft.errorreporting
@@ -64,9 +70,12 @@ delete ~/Library/Containers/com.microsoft.Powerpoint
 delete ~/Library/Containers/com.microsoft.RMS-XPCService
 delete ~/Library/Containers/com.microsoft.Word
 delete ~/Library/Containers/com.microsoft.onenote.mac
+delete ~/Library/Containers/com.microsoft.onedrive.findersync
 delete ~/Library/Group\ Containers/UBF8T346G9.ms
 delete ~/Library/Group\ Containers/UBF8T346G9.Office
 delete ~/Library/Group\ Containers/UBF8T346G9.OfficeOsfWebHost
+delete ~/Library/Group\ Containers/UBF8T346G9.OfficeOneDriveSyncIntegration
+delete ~/Library/Group\ Containers/UBF8T346G9.OneDriveStandaloneSuite
 
 #4 Remove the Application Support
 delete /Library/Application\ Support/Microsoft
@@ -78,6 +87,7 @@ deletefiles ~/Library/Application\ Support/CrashReporter/Microsoft\ Excel
 deletefiles ~/Library/Application\ Support/CrashReporter/Microsoft\ OneNote
 deletefiles ~/Library/Application\ Support/CrashReporter/Microsoft\ PowerPoint
 deletefiles ~/Library/Application\ Support/CrashReporter/Microsoft\ Word
+deletefiles ~/Library/Application\ Support/CrashReporter/OneDrive
 
 #5 Remove the Saved Application State
 deletefiles ~/Library/Saved\ Application\ State/com.microsoft
@@ -95,6 +105,7 @@ deletefiles ~/Library/Logs/DiagnosticReports/Microsoft\ Excel
 deletefiles ~/Library/Logs/DiagnosticReports/Microsoft\ OneNote
 deletefiles ~/Library/Logs/DiagnosticReports/Microsoft\ PowerPoint
 deletefiles ~/Library/Logs/DiagnosticReports/Microsoft\ Word
+deletefiles ~/Library/Logs/DiagnosticReports/OneDrive
 deletefiles /Library/Logs/DiagnosticReports/Microsoft\ Communicator
 deletefiles /Library/Logs/DiagnosticReports/Microsoft\ Messenger
 deletefiles /Library/Logs/DiagnosticReports/Microsoft\ Outlook
@@ -102,6 +113,7 @@ deletefiles /Library/Logs/DiagnosticReports/Microsoft\ Excel
 deletefiles /Library/Logs/DiagnosticReports/Microsoft\ OneNote
 deletefiles /Library/Logs/DiagnosticReports/Microsoft\ PowerPoint
 deletefiles /Library/Logs/DiagnosticReports/Microsoft\ Word
+deletefiles /Library/Logs/DiagnosticReports/OneDrive
 
 #8 Remove the Automater
 delete /Library/Automator/Add\ Attachments\ to\ Outlook\ Messages.action
@@ -208,6 +220,7 @@ deletefiles ~/Library/Preferences/ByHost/com.microsoft
 #10 Remove the receipts
 deletefiles /Library/Receipts/Office2011_
 deletefiles /Library/Receipts/Office2016_
+deletefiles /Library/Receipts/Office2019_
 deletefiles /private/var/db/receipts/com.microsoft.office
 
 #11 Remove the Microsoft fonts
@@ -218,6 +231,10 @@ delete ~/Documents/Microsoft\ ~\ Data
 
 #13 Remove Internet Plug-Ins
 deletefiles /Library/Internet\ Plug-Ins/SharePoint
+
+#14 Remove cookies
+delete ~/Library/Cookies/com.microsoft.onedrive.binarycookies
+delete ~/Library/Cookies/com.microsoft.onedriveupdater.binarycookies
 
 echo '\nDone\n'
 echo '****************************************************'
